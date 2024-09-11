@@ -1,201 +1,219 @@
-import React, { useState } from 'react';
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Condominio Cumbres de Quilpué</title>
+    <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+    <div id="root"></div>
 
-const TabButton = ({ isActive, onClick, children }) => (
-  <button
-    onClick={onClick}
-    className={`px-4 py-2 font-semibold ${
-      isActive ? 'bg-blue-500 text-white' : 'bg-gray-200 text-gray-700'
-    } rounded-t-lg`}
-  >
-    {children}
-  </button>
-);
+    <script type="text/babel">
+        const { useState } = React;
 
-const OrganigramaNode = ({ title, children, functions }) => {
-  const [isOpen, setIsOpen] = useState(false);
+        const TabButton = ({ isActive, onClick, children }) => (
+            <button
+                onClick={onClick}
+                className={`px-4 py-2 font-semibold ${
+                    isActive ? 'bg-blue-500 text-white' : 'bg-gray-200 text-gray-700'
+                } rounded-t-lg`}
+            >
+                {children}
+            </button>
+        );
 
-  return (
-    <div className="flex flex-col items-center">
-      <div 
-        className="border-2 border-blue-500 rounded p-2 m-2 cursor-pointer"
-        onClick={() => setIsOpen(!isOpen)}
-      >
-        {title}
-      </div>
-      {isOpen && (
-        <div className="bg-gray-100 p-2 rounded mt-2 max-w-xs">
-          <h4 className="font-bold">Funciones:</h4>
-          <ul className="list-disc pl-5">
-            {functions.map((func, index) => (
-              <li key={index}>{func}</li>
-            ))}
-          </ul>
-        </div>
-      )}
-      {children && (
-        <div className="flex flex-wrap justify-center">
-          {children}
-        </div>
-      )}
-    </div>
-  );
-};
+        const OrganigramaNode = ({ title, children, functions }) => {
+            const [isOpen, setIsOpen] = useState(false);
 
-const Organigrama = () => (
-  <div className="p-4 overflow-x-auto">
-    <h2 className="text-2xl font-bold mb-4">Organigrama del Staff</h2>
-    <div className="flex justify-center">
-      <OrganigramaNode 
-        title="Comité" 
-        functions={["Toma de decisiones estratégicas", "Aprobación de presupuestos", "Supervisión general"]}
-      >
-        <OrganigramaNode 
-          title="Administración" 
-          functions={["Gestión diaria del condominio", "Coordinación con proveedores", "Manejo de finanzas"]}
-        >
-          <OrganigramaNode 
-            title="Mayordomo"
-            functions={["Supervisión del personal", "Coordinación de mantenimiento", "Atención a residentes"]}
-          >
-            <OrganigramaNode 
-              title="Conserjes" 
-              functions={["Control de accesos", "Vigilancia", "Atención a residentes"]}
-            />
-            <OrganigramaNode 
-              title="Personal de Aseo" 
-              functions={["Limpieza de áreas comunes", "Mantenimiento básico"]}
-            />
-            <OrganigramaNode 
-              title="Proveedores" 
-              functions={["Servicios especializados", "Mantenimiento de equipos", "Suministros"]}
-            />
-          </OrganigramaNode>
-        </OrganigramaNode>
-      </OrganigramaNode>
-    </div>
-  </div>
-);
+            return (
+                <div className="flex flex-col items-center">
+                    <div 
+                        className="border-2 border-blue-500 rounded p-2 m-2 cursor-pointer"
+                        onClick={() => setIsOpen(!isOpen)}
+                    >
+                        {title}
+                    </div>
+                    {isOpen && (
+                        <div className="bg-gray-100 p-2 rounded mt-2 max-w-xs">
+                            <h4 className="font-bold">Funciones:</h4>
+                            <ul className="list-disc pl-5">
+                                {functions.map((func, index) => (
+                                    <li key={index}>{func}</li>
+                                ))}
+                            </ul>
+                        </div>
+                    )}
+                    {children && (
+                        <div className="flex flex-wrap justify-center">
+                            {children}
+                        </div>
+                    )}
+                </div>
+            );
+        };
 
-const TareasPendientes = () => {
-  const tareas = [
-    { categoria: "Sistemas", tarea: "Habilitar Comunidad feliz y código QR por parte de BP." },
-    { categoria: "Sistemas", tarea: "Actualización de datos de residentes para la correcta puesta en marcha de las cámaras del portón." },
-    { categoria: "Mantenimiento", tarea: "Cambio de puerta de bodega." },
-    { categoria: "Mantenimiento", tarea: "Cotización de gomas para escalas de torres (7-8-9 prioritario)." },
-    { categoria: "Seguridad", tarea: "Adquisición de extintores, Fireball y equipo de emergencia para torres." },
-    { categoria: "Seguridad", tarea: "Cotizaciones de seguro contra terremoto complementario a Incendios." },
-    { categoria: "Mantenimiento", tarea: "Sistema de Riego del condominio: cotizaciones y automatización en 4 sectores." },
-    { categoria: "Seguridad", tarea: "Vincular cámaras de seguridad a red de internet (teléfonos móviles)." },
-    { categoria: "Administración", tarea: "Publicación de turnos del personal y visitas BP (administración y supervisor)." },
-    { categoria: "Administración", tarea: "Cotización e instalación de reloj control para personal." },
-    { categoria: "Seguridad", tarea: "Seguimiento del caso Efesys (cámaras) y mejora del sistema." },
-    { categoria: "Mantenimiento", tarea: "Actualización de trabajos pendientes por parte de Galilea." },
-    { categoria: "Mantenimiento", tarea: "Revisión exhaustiva de todas las torres por Mayordomo y Supervisor." },
-  ];
+        const Organigrama = () => (
+            <div className="p-4 overflow-x-auto">
+                <h2 className="text-2xl font-bold mb-4">Organigrama del Staff</h2>
+                <div className="flex justify-center">
+                    <OrganigramaNode 
+                        title="Comité" 
+                        functions={["Toma de decisiones estratégicas", "Aprobación de presupuestos", "Supervisión general"]}
+                    >
+                        <OrganigramaNode 
+                            title="Administración" 
+                            functions={["Gestión diaria del condominio", "Coordinación con proveedores", "Manejo de finanzas"]}
+                        >
+                            <OrganigramaNode 
+                                title="Mayordomo"
+                                functions={["Supervisión del personal", "Coordinación de mantenimiento", "Atención a residentes"]}
+                            >
+                                <OrganigramaNode 
+                                    title="Conserjes" 
+                                    functions={["Control de accesos", "Vigilancia", "Atención a residentes"]}
+                                />
+                                <OrganigramaNode 
+                                    title="Personal de Aseo" 
+                                    functions={["Limpieza de áreas comunes", "Mantenimiento básico"]}
+                                />
+                                <OrganigramaNode 
+                                    title="Proveedores" 
+                                    functions={["Servicios especializados", "Mantenimiento de equipos", "Suministros"]}
+                                />
+                            </OrganigramaNode>
+                        </OrganigramaNode>
+                    </OrganigramaNode>
+                </div>
+            </div>
+        );
 
-  const categorias = [...new Set(tareas.map(t => t.categoria))];
+        const tareas = [
+            { categoria: "Sistemas", tarea: "Habilitar Comunidad feliz y código QR por parte de BP." },
+            { categoria: "Sistemas", tarea: "Actualización de datos de residentes para la correcta puesta en marcha de las cámaras del portón." },
+            { categoria: "Mantenimiento", tarea: "Cambio de puerta de bodega." },
+            { categoria: "Mantenimiento", tarea: "Cotización de gomas para escalas de torres (7-8-9 prioritario)." },
+            { categoria: "Seguridad", tarea: "Adquisición de extintores, Fireball y equipo de emergencia para torres." },
+            { categoria: "Seguridad", tarea: "Cotizaciones de seguro contra terremoto complementario a Incendios." },
+            { categoria: "Mantenimiento", tarea: "Sistema de Riego del condominio: cotizaciones y automatización en 4 sectores." },
+            { categoria: "Seguridad", tarea: "Vincular cámaras de seguridad a red de internet (teléfonos móviles)." },
+            { categoria: "Administración", tarea: "Publicación de turnos del personal y visitas BP (administración y supervisor)." },
+            { categoria: "Administración", tarea: "Cotización e instalación de reloj control para personal." },
+            { categoria: "Seguridad", tarea: "Seguimiento del caso Efesys (cámaras) y mejora del sistema." },
+            { categoria: "Mantenimiento", tarea: "Actualización de trabajos pendientes por parte de Galilea." },
+            { categoria: "Mantenimiento", tarea: "Revisión exhaustiva de todas las torres por Mayordomo y Supervisor." },
+        ];
 
-  return (
-    <div className="p-4">
-      <h2 className="text-2xl font-bold mb-4">Tareas Pendientes</h2>
-      {categorias.map(categoria => (
-        <div key={categoria} className="mb-4 p-4 border rounded-lg">
-          <h3 className="text-xl font-semibold mb-2">{categoria}</h3>
-          <ul className="space-y-2">
-            {tareas
-              .filter(t => t.categoria === categoria)
-              .map((tarea, index) => (
-                <li key={index} className="flex items-center">
-                  <span className="mr-2">○</span>
-                  {tarea.tarea}
-                </li>
-              ))}
-          </ul>
-        </div>
-      ))}
-    </div>
-  );
-};
+        const TareasPendientes = () => {
+            const categorias = [...new Set(tareas.map(t => t.categoria))];
 
-const FechasImportantes = () => {
-  const fechas = [
-    { dia: 2, descripcion: "Propuesta de GGCC" },
-    { dia: 3, descripcion: "Carga de GG.CC. (a más tardar)" },
-    { dia: 3, descripcion: "Consumos básicos" },
-    { dia: 5, descripcion: "Publicación de roles Conserjería, aseo y Administración" },
-    { dia: 15, descripcion: "Reporte de corte de suministros a morosos" },
-    { dia: 20, descripcion: "Proyección de GGCC" },
-    { dia: 25, descripcion: "Presentación de propuestas de planilla de sueldos" },
-  ];
+            return (
+                <div className="p-4">
+                    <h2 className="text-2xl font-bold mb-4">Tareas Pendientes</h2>
+                    {categorias.map(categoria => (
+                        <div key={categoria} className="mb-4 p-4 border rounded-lg">
+                            <h3 className="text-xl font-semibold mb-2">{categoria}</h3>
+                            <ul className="space-y-2">
+                                {tareas
+                                    .filter(t => t.categoria === categoria)
+                                    .map((tarea, index) => (
+                                        <li key={index} className="flex items-center">
+                                            <span className="mr-2">○</span>
+                                            {tarea.tarea}
+                                        </li>
+                                    ))}
+                            </ul>
+                        </div>
+                    ))}
+                </div>
+            );
+        };
 
-  return (
-    <div className="p-4">
-      <h2 className="text-2xl font-bold mb-4">Fechas Importantes</h2>
-      <div className="overflow-x-auto">
-        <table className="w-full border-collapse">
-          <thead>
-            <tr className="bg-gray-200">
-              <th className="border p-2">Día del Mes</th>
-              <th className="border p-2">Descripción</th>
-            </tr>
-          </thead>
-          <tbody>
-            {fechas.map((fecha, index) => (
-              <tr key={index} className={index % 2 === 0 ? 'bg-gray-100' : ''}>
-                <td className="border p-2">{fecha.dia}</td>
-                <td className="border p-2">{fecha.descripcion}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-    </div>
-  );
-};
+        const fechas = [
+            { dia: 2, descripcion: "Propuesta de GGCC" },
+            { dia: 3, descripcion: "Carga de GG.CC. (a más tardar)" },
+            { dia: 3, descripcion: "Consumos básicos" },
+            { dia: 5, descripcion: "Publicación de roles Conserjería, aseo y Administración" },
+            { dia: 15, descripcion: "Reporte de corte de suministros a morosos" },
+            { dia: 20, descripcion: "Proyección de GGCC" },
+            { dia: 25, descripcion: "Presentación de propuestas de planilla de sueldos" },
+        ];
 
-const Dashboard = () => {
-  const [selectedTab, setSelectedTab] = useState('organigrama');
-  const [fontSize, setFontSize] = useState(16);
+        const FechasImportantes = () => {
+            return (
+                <div className="p-4">
+                    <h2 className="text-2xl font-bold mb-4">Fechas Importantes</h2>
+                    <div className="overflow-x-auto">
+                        <table className="w-full border-collapse">
+                            <thead>
+                                <tr className="bg-gray-200">
+                                    <th className="border p-2">Día del Mes</th>
+                                    <th className="border p-2">Descripción</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {fechas.map((fecha, index) => (
+                                    <tr key={index} className={index % 2 === 0 ? 'bg-gray-100' : ''}>
+                                        <td className="border p-2">{fecha.dia}</td>
+                                        <td className="border p-2">{fecha.descripcion}</td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            );
+        };
 
-  const increaseFontSize = () => setFontSize(prev => Math.min(prev + 2, 24));
-  const decreaseFontSize = () => setFontSize(prev => Math.max(prev - 2, 12));
+        const App = () => {
+            const [selectedTab, setSelectedTab] = useState('organigrama');
+            const [fontSize, setFontSize] = useState(16);
 
-  return (
-    <div className="container mx-auto p-4" style={{ fontSize: `${fontSize}px` }}>
-      <h1 className="text-3xl font-bold mb-6">Dashboard Condominio Cumbres de Quilpué</h1>
-      <div className="mb-4 flex flex-wrap justify-between items-center">
-        <div className="flex flex-wrap">
-          <TabButton
-            isActive={selectedTab === 'organigrama'}
-            onClick={() => setSelectedTab('organigrama')}
-          >
-            Organigrama
-          </TabButton>
-          <TabButton
-            isActive={selectedTab === 'tareas'}
-            onClick={() => setSelectedTab('tareas')}
-          >
-            Tareas Pendientes
-          </TabButton>
-          <TabButton
-            isActive={selectedTab === 'fechas'}
-            onClick={() => setSelectedTab('fechas')}
-          >
-            Fechas Importantes
-          </TabButton>
-        </div>
-        <div className="flex items-center mt-2 sm:mt-0">
-          <button onClick={decreaseFontSize} className="px-2 py-1 bg-gray-200 rounded mr-2">A-</button>
-          <button onClick={increaseFontSize} className="px-2 py-1 bg-gray-200 rounded">A+</button>
-        </div>
-      </div>
-      <div className="border rounded-lg p-4">
-        {selectedTab === 'organigrama' && <Organigrama />}
-        {selectedTab === 'tareas' && <TareasPendientes />}
-        {selectedTab === 'fechas' && <FechasImportantes />}
-      </div>
-    </div>
-  );
-};
+            const increaseFontSize = () => setFontSize(prev => Math.min(prev + 2, 24));
+            const decreaseFontSize = () => setFontSize(prev => Math.max(prev - 2, 12));
 
-export default Dashboard;
+            return (
+                <div className="container mx-auto p-4" style={{ fontSize: `${fontSize}px` }}>
+                    <h1 className="text-3xl font-bold mb-6">Dashboard Condominio Cumbres de Quilpué</h1>
+                    <div className="mb-4 flex flex-wrap justify-between items-center">
+                        <div className="flex flex-wrap">
+                            <TabButton
+                                isActive={selectedTab === 'organigrama'}
+                                onClick={() => setSelectedTab('organigrama')}
+                            >
+                                Organigrama
+                            </TabButton>
+                            <TabButton
+                                isActive={selectedTab === 'tareas'}
+                                onClick={() => setSelectedTab('tareas')}
+                            >
+                                Tareas Pendientes
+                            </TabButton>
+                            <TabButton
+                                isActive={selectedTab === 'fechas'}
+                                onClick={() => setSelectedTab('fechas')}
+                            >
+                                Fechas Importantes
+                            </TabButton>
+                        </div>
+                        <div className="flex items-center mt-2 sm:mt-0">
+                            <button onClick={decreaseFontSize} className="px-2 py-1 bg-gray-200 rounded mr-2">A-</button>
+                            <button onClick={increaseFontSize} className="px-2 py-1 bg-gray-200 rounded">A+</button>
+                        </div>
+                    </div>
+                    <div className="border rounded-lg p-4">
+                        {selectedTab === 'organigrama' && <Organigrama />}
+                        {selectedTab === 'tareas' && <TareasPendientes />}
+                        {selectedTab === 'fechas' && <FechasImportantes />}
+                    </div>
+                </div>
+            );
+        };
+
+        ReactDOM.render(<App />, document.getElementById('root'));
+    </script>
+</body>
+</html>
